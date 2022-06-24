@@ -5,7 +5,7 @@
                         <div class="logo-img">
                             <img src="<?= base_url(); ?>/public/src/img/brand-white.png" class="header-brand-img" alt="lavalite">
                         </div>
-                        <span class="text">OUR POS</span>
+                        <span class="text">&nbsp;cPanel</span>
                     </a>
                     <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
                     <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>
@@ -32,7 +32,7 @@
                             </div> -->
                             <div class="nav-lavel">Store Management</div>
                             <div class="nav-item <?=session()->getTempdata('store')?> has-sub">
-                                <a href="#" ><i class="fas fa-store-alt"></i><span>Store</span></a>
+                                <?php /*<a href="#" ><i class="fas fa-store-alt"></i><span>Store</span></a>*/?>
                                 <div class="submenu-content">
                                     <a loading="true" href="<?= base_url(); ?>/store" class="menu-item"><i class="fas fa-store"></i><span>Store Front</span></a>
                                     <div class="nav-item has-sub">
@@ -57,34 +57,34 @@
                                 <div class="submenu-content">
                                     <a loading="true" href="<?= base_url(); ?>/products/add" class="menu-item"><i class="ik ik-plus"></i><span>Add Product</span></a>
                                     <a loading="true" href="<?= base_url(); ?>/products" class="menu-item"><i class="ik ik-grid"></i><span>Products</span></a>
-                                    <a loading="true" href="<?= base_url(); ?>/products/add_category" class="menu-item"><i class="ik ik-folder-plus"></i><span>Add Category</span></a>
-                                    <a loading="true" href="<?= base_url(); ?>/products/categories" class="menu-item"><i class="ik ik-layout"></i><span>Categories</span></a>
+                                    <?php /* <a loading="true" href="<?= base_url(); ?>/products/add_category" class="menu-item"><i class="ik ik-folder-plus"></i><span>Add Category</span></a>
+                                    <a loading="true" href="<?= base_url(); ?>/products/categories" class="menu-item"><i class="ik ik-layout"></i><span>Categories</span></a> */?>
                                 </div>
                             </div>
 
-                            <div class="nav-lavel">Administration Management</div>
-                            <div class="nav-item <?=session()->getTempdata('customers')?> has-sub">
-                                <a href="#"><i class="fas fa-address-book"></i><span>Customers</span></a>
+                            <?php /*<div class="nav-lavel">Administration Management</div>*/?>
+                            <?php /*<div class="nav-item <?=session()->getTempdata('customers')?> has-sub">*/?>
+                                <?php /*<a href="#"><i class="fas fa-address-book"></i><span>Customers</span></a>
                                 <div class="submenu-content">
                                     <a loading="true" href="<?= base_url(); ?>/customers/add" class="menu-item"><i class="ik ik-user-plus"></i><span>Add Customer</span></a>
                                     <a loading="true" href="<?= base_url(); ?>/customers" class="menu-item"><i class="ik ik-users"></i><span>Manage Customers</span></a>
                                 </div>
-                            </div>
+                            </div>*/?>
                             <!--
                             <div class="nav-item ">
                                 <a href="ui/icons.html"><i class="ik ik-command"></i><span>Icons</span></a>
                             </div>
                             <div class="nav-lavel">================</div>
                             -->
-                            <div class="nav-item <?=session()->getTempdata('users')?>
-                            <?=session()->getTempdata('roles')?> has-sub">
+                           <?php /* <div class="nav-item <?=session()->getTempdata('users')?>*/?>
+                            <?php /*<?=session()->getTempdata('roles')?> has-sub">
                                 <a href="#"><i class="ik ik-edit"></i><span>Administration</span></a>
                                 <div class="submenu-content">
                                     <a loading="true" href="<?=base_url()?>/users/add" class="menu-item"><i class="ik ik-user-plus"></i><span>Add User</span></a>
                                     <a loading="true" href="<?=base_url()?>/users" class="menu-item"><i class="ik ik-users"></i><span>Users</span></a>
                                     <a loading="true" href="<?=base_url()?>/roles" class="menu-item"><i class="ik ik-award"></i><span>User Roles</span></a>
                                 </div>
-                            </div>
+                            </div>*/?>
                             <!--
                             <div class="nav-item ">
                                 <a href="form-picker.html"><i class="ik ik-terminal"></i><span>Form Picker</span> <span class="badge badge-success">New</span></a>

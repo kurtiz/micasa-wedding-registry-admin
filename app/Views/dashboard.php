@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard | Our Pos</title>
+    <title>Dashboard | MiCasa cPanel</title>
     <meta property="og:image" content="<?= base_url(); ?>/public/src/img/brand-white.png" />
     <meta name="description" content="View recent activities and sales. Get an overview on the performance of your store.">
     <meta name="keywords" content="">
@@ -66,7 +66,7 @@
                         <div class="row align-items-end">
                             <div class="col-lg-8">
                                 <div class="page-header-title">
-                                    <i class="ik ik-bar-chart-2 bg-blue"></i>
+                                    <i id="currency-convert" class="ik ik-repeat bg-blue"></i>
                                     <div class="d-inline">
                                         <h5>Dashboard</h5>
                                         <span>Shop's Statistic Overview</span>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="row">
                         <!-- General Cash info start -->
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-md-6">
                             <div class="card prod-p-card card-red">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-30">
@@ -101,13 +101,17 @@
                                             </h6>
                                         <?php if (!empty($allSales)):?>
                                             <h3 class="mb-0 fw-700 text-white">
-                                                <small style="font-size: 15px">₵</small>
+                                                <small class="currency-symbol" style="font-size: 15px">₵</small>
                                                 <span class="comma">
                                                 <?=$allSales["today_amount"]?>
                                                 </span>
                                             </h3>
                                         <?php else:?>
-                                            <h3 class="mb-0 fw-700 text-white">GHc. 0</h3>
+
+                                            <h3 class="mb-0 fw-700 text-white">
+                                                <small class="currency-symbol" style="font-size: 15px">₵</small>
+                                                <span class="comma">28976354.00</span>
+                                            </h3>
                                         <?php endif;?>
                                         </div>
                                         <div class="col-auto">
@@ -118,7 +122,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-md-6">
                             <div class="card prod-p-card card-blue">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-30">
@@ -130,13 +134,16 @@
                                             </h6>
                                             <?php if (!empty($allSales)):?>
                                             <h3 class="mb-0 fw-700 text-white">
-                                                <small style="font-size: 15px">₵</small>
+                                                <small class="currency-symbol" style="font-size: 15px">₵</small>
                                                 <span class="comma">
                                                     <?=$allSales['month_amount']?>
                                                 </span>
                                             </h3>
                                             <?php else:?>
-                                            <h3 class="mb-0 fw-700 text-white">15,830</h3>
+                                            <h3 class="mb-0 fw-700 text-white">
+                                                <small class="currency-symbol" style="font-size: 15px">₵</small>
+                                                <span class="comma">6851292835</span>
+                                            </h3>
                                             <?php endif;?>
                                         </div>
                                         <div class="col-auto">
@@ -147,7 +154,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-md-6">
                             <div class="card prod-p-card card-green">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-30">
@@ -175,7 +182,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-md-6">
                             <div class="card prod-p-card card-yellow">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-30">
@@ -516,10 +523,14 @@
     <script src="<?=base_url(); ?>/public/js/widget-statistic.js"></script>
     <script src="<?=base_url(); ?>/public/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
     <script>
-        d = document.getElementsByClassName('comma');
-        for (let i = 0; i < d.length; i++) {
-            d[i].innerText = parseFloat(d[i].innerText).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
+
+        $(document).ready(function () {
+            addComma("comma")
+        })
+
+        $("#currency-convert").on("click",  () => {
+            switchSymbol()
+        })
          <?php 
             if (!empty(session()->getTempdata('name'))): 
          ?>

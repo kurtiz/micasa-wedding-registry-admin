@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Login | Our Pos</title>
+        <title>Login | MiCasa cPanel</title>
         <meta property="og:image" content="<?= base_url(); ?>/public/src/img/brand-white.png" />
         <meta name="description" content="Login to your store to unlock the incredible features that awaits you.">
         <meta name="keywords" content="">
-        <link rel="manifest" href="<?=base_url(); ?>/public/manifest.json">
+<!--        <link rel="manifest" href="--><?//=base_url(); ?><!--/public/manifest.json">-->
         <link rel="apple-touch-icon"href="<?php base_url(); ?>public/favicon.ico" type="image/x-icon" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#404E67"/>
