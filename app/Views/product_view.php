@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>View Product | Our Pos</title>
+    <title>View Product | MiCasa cPanel</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -149,15 +149,41 @@
                         <div class="card" style="min-height: 484px;">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-12 text-center">
+                                    <div class="col-md-12 text-center mb-2">
                                         <?php
-                                        if($product[0]['image'] == ""):
+                                        if(explode(",", $product[0]['image'])[0] == ""):
                                         ?>
                                             <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                         <?php
                                         else:
                                         ?>
-                                        <img id="blah" class="img-fluid rounded" src="<?=$product[0]['image']?>" alt="">
+                                        <img id="blah" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[0]?>" alt="">
+                                        <?php
+                                        endif;
+                                        ?>
+                                        <?php
+                                        if(explode(",", $product[0]['image'])[1] == ""):
+                                        ?>
+                                        <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                        <?php
+                                        else:
+                                        ?>
+                                        <div class="col-md-6 text-center">
+                                            <img id="blah2" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[1]?>" alt="">
+                                        </div>
+                                        <?php
+                                        endif;
+                                        ?>
+                                        <?php
+                                        if(explode(",", $product[0]['image'])[2] == ""):
+                                        ?>
+                                        <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                        <?php
+                                        else:
+                                        ?>
+                                        <div class="col-md-6 text-center">
+                                            <img id="blah3" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[2]?>" alt="">
+                                        </div>
                                         <?php
                                         endif;
                                         ?>

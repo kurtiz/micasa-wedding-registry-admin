@@ -13,25 +13,24 @@
         </span>
     </div>
 </footer>
-<script src="<?= base_url(); ?>/public/checkSW.js"></script>
 <script>
-
-  setTimeout(()=>{
-      console.clear()
-      console.warn("Do not copy / paste any code here..\n" +
-          "If you temper with any code here, it might affect the performance of" +
-          " the software which might end up malfunctioning.\n" +
-          "You might end up exposing your data hence it can be stolen." +
-          " We are not liable for any malfunctions or data loss if so happens")
-  },1500)
-
-setInterval(()=>{
-    console.clear()
-    console.warn("Do not copy / paste any code here..\n" +
-        "If you temper with any code here, it might affect the performance of" +
-        " the software which might end up malfunctioning.\n" +
-        "You might end up exposing your data hence it can be stolen." +
-        " We are not liable for any malfunctions or data loss if so happens")
-},25000)
+//
+//  setTimeout(()=>{
+//      console.clear()
+//      console.warn("Do not copy / paste any code here..\n" +
+//          "If you temper with any code here, it might affect the performance of" +
+//          " the software which might end up malfunctioning.\n" +
+//          "You might end up exposing your data hence it can be stolen." +
+//          " We are not liable for any malfunctions or data loss if so happens")
+//  },1500)
+//
+//setInterval(()=>{
+//    console.clear()
+//    console.warn("Do not copy / paste any code here..\n" +
+//        "If you temper with any code here, it might affect the performance of" +
+//        " the software which might end up malfunctioning.\n" +
+//        "You might end up exposing your data hence it can be stolen." +
+//        " We are not liable for any malfunctions or data loss if so happens")
+//},25000)
 
 </script>

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Products | Our Pos</title>
+    <title>Products | MiCasa cPanel</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,34 +102,20 @@
                                                     <th class="nosort"></th>
                                                     <th>Name</th>
                                                     <th>Description</th>
-                                                    <th>Category</th>
-                                                    <th hidden>Barcode</th>
-                                                    <th>Price (GH¢)</th>
-                                                    <th>Quantity</th>
+                                                    <th>Price ($)</th>
                                                     <th class="nosort">&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php foreach($products as $row): ?>
                                                 <tr id="product<?=$row['product_id']?>"><?php if (!empty($row['image'])): ?>
-                                                        <td><img id="img<?=$row['product_id']?>" src="<?=$row['image']?>" class="table-user-thumb" alt=""></td>
+                                                        <td><img id="img<?=$row['product_id']?>" src="<?= base_url() . explode(",", $row['image'])[0]?>" class="table-user-thumb" alt=""></td>
                                                     <?php else: ?>
                                                         <td><img id="img<?=$row['product_id']?>" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" class="table-user-thumb" alt=""></td>
                                                     <?php endif; ?>
                                                     <td id="name<?=$row['product_id']?>" ><?=$row['product_name']?></td>
                                                     <td><?=$row['description']?></td>
-                                                    <?php if (!empty($row['cat_name'])): ?>
-                                                        <td><?=ucwords($row['cat_name'])?></td>
-                                                    <?php else: ?>
-                                                        <td>No Category</td>
-                                                    <?php endif; ?>
-                                                    <td hidden ><?=$row['barcode']?></td>
-                                                    <td><?=$row['selling_price']?></td>
-                                                    <td>
-                                                        <?=$row['quantity'];?> &nbsp <?php if (($row['quantity']* 1) <= ($row['refill']* 1)) {
-                                                            echo '<span class="badge badge-danger">low</span>';
-                                                        }?>
-                                                    </td>
+                                                    <td><?=$row['cost_price']?></td>
                                                     <td>
                                                         <div class="table-actions">
                                                             <a href="<?= base_url(); ?>/products/view/<?= $row['product_id'] ?>"><i

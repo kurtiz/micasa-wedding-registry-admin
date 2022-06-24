@@ -1,9 +1,9 @@
-$("#submit").click(function() {
-    sellingP = parseFloat($("#sellingprice").val()).toFixed(2) * 1;
-    costP = parseFloat($("#costprice").val()).toFixed(2) * 1;
+let productname = $("#productname")
+let price = $("#costprice")
 
+$("#submit").on("click", function() {
 
-    if ($("#productname").val() == "") {
+    if (productname.val() === "") {
 
         $.toast({
             heading: 'Error',
@@ -12,21 +12,19 @@ $("#submit").click(function() {
             icon: 'error',
             position: "top-right"
         })
-        $("#productname").addClass("form-control-danger");
 
+        productname.addClass("form-control-danger");
 
-    } else if (sellingP < costP) {
-
+    } else if(price === "") {
         $.toast({
             heading: 'Error',
-            text: 'Selling price must be more than Cost price',
+            text: 'You must enter price',
             showHideTransition: 'fade',
             icon: 'error',
             position: "top-right"
         })
-        $("#sellingprice").addClass("form-control-danger");
 
-        $("#costprice").addClass("form-control-danger");
+        price.addClass("form-control-danger");
     } else {
         //shows a loading screen overlay
         loading_overlay(1)
@@ -36,36 +34,10 @@ $("#submit").click(function() {
     }
 });
 
-$("#costprice").keyup(function() {
-    sellingP = parseFloat($("#sellingprice").val()).toFixed(2) * 1;
-    costP = parseFloat($("#costprice").val()).toFixed(2) * 1;
-    if (sellingP > costP) {
-        console.log("selling: " + sellingP + "\ncost: " + costP);
 
-        $("#sellingprice").removeClass("form-control-danger");
+productname.keyup(function() {
 
-        $("#costprice").removeClass("form-control-danger");
-
-    } else {
-
-        console.log("selling: " + sellingP + "\ncost: " + costP);
-        $.toast({
-            heading: 'Error',
-            text: 'Selling price must be more than Cost price',
-            showHideTransition: 'fade',
-            icon: 'error',
-            position: "top-right"
-        })
-        $("#sellingprice").addClass("form-control-danger");
-
-        $("#costprice").addClass("form-control-danger");
-    }
-
-});
-
-$("#productname").keyup(function() {
-
-    if ($("#productname").val() == "") {
+    if (productname.val() === "") {
         $.toast({
             heading: 'Error',
             text: 'Name of product is required',
@@ -73,9 +45,24 @@ $("#productname").keyup(function() {
             icon: 'error',
             position: "top-right"
         })
-        $("#productname").addClass("form-control-danger");
+        productname.addClass("form-control-danger");
     } else {
-        $("#productname").removeClass("form-control-danger");
+        productname.removeClass("form-control-danger");
     }
 
+});
+
+price.keyup(function() {
+    if (price.val() === "") {
+        $.toast({
+            heading: 'Error',
+            text: 'Price of product is required',
+            showHideTransition: 'fade',
+            icon: 'error',
+            position: "top-right"
+        })
+        price.addClass("form-control-danger");
+    } else {
+        price.removeClass("form-control-danger");
+    }
 });

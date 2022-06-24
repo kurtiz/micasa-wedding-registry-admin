@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Add Products | Our Pos</title>
+    <title>Add Products | MiCasa cPanel</title>
     <meta property="og:image" content="<?= base_url(); ?>/public/src/img/brand-white.png" />
     <meta name="description" content="Add new products to your store's database">
     <meta name="keywords" content="">
@@ -96,35 +96,17 @@
                                                 <input type="text" class="form-control" required id="productname" name="productname" placeholder="eg. Coke - 300ml">
                                             </div>
                                             <div class="form-group">
-                                                <label for="specs">Specification</label>
+                                                <label for="specs">Specification / Description</label>
                                                 <textarea class="form-control" id="specs" name="description" placeholder="zero sugar, 300ml, "></textarea>
                                             </div>
+
                                             <div class="form-group">
-                                                <label for="sellingprice">Selling Price</label>
-                                                <input type="number" step="0.01" class="form-control" required  id="sellingprice" name="sellingprice" placeholder="Selling Price">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="costprice">Cost Price</label>
+                                                <label for="costprice">Price($)</label>
                                                 <input type="number" step="0.01" class="form-control" required id="costprice" name="costprice" placeholder="Cost Price">
                                             </div>
                                             <div class="form-group">
-                                                        <label for="">Category</label>
-                                                        <?php if(is_array($categories)): ?>
-                                                            <select id="category" name="category" class="form-control select2">
-                                                            <option value="">select category</option>
-                                                        <?php foreach ($categories as $row):?>    
-                                                            
-                                                            <option value="<?=$row['cat_id'].":".$row['cat_name']?>"><?=$row['cat_name']?></option>
-                                                        <?php endforeach; ?>
-                                                            </select>
-                                                        <?php else: ?>
-                                                            <select id="category" name="category" class="form-control select2">
-                                                            </select>
-                                                        <?php endif; ?>
-                                                    </div>
-                                            <div class="form-group">
-                                                <label>Image</label>
-                                                <input type="file" name="img" id="imgupload" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
+                                                <label>Image 1</label>
+                                                <input type="file" name="img[]" id="imgupload" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
                                                 <div class="input-group col-xs-12">
                                                     <input type="text" class="form-control file-upload-info" disabled id="imagename" placeholder="Upload Image">
                                                     <span class="input-group-append">
@@ -133,23 +115,36 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="quantity">Quantity</label>
-                                                <input type="number" step="0.01" class="form-control" value="0" id="quantity" name="quantity" >
-                                            </div>
+                                                    <label>Image 2</label>
+                                                    <input type="file" name="img[]" id="imgupload2" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
+                                                    <div class="input-group col-xs-12">
+                                                        <input type="text" class="form-control file-upload-info" disabled id="imagename2" placeholder="Upload Image">
+                                                        <span class="input-group-append">
+                                                            <button class="file-upload-browse btn btn-primary" id="upbtn2" type="button">Select</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             <div class="form-group">
-                                                <label for="refill">Refill Alert Level</label>
-                                                <input type="number" step="0.01" class="form-control" value="0" id="refill" name="refill">
-                                            </div>
+                                                        <label>Image 3</label>
+                                                        <input type="file" name="img[]" id="imgupload3" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
+                                                        <div class="input-group col-xs-12">
+                                                            <input type="text" class="form-control file-upload-info" disabled id="imagename3" placeholder="Upload Image">
+                                                            <span class="input-group-append">
+                                                                <button class="file-upload-browse btn btn-primary" id="upbtn3" type="button">Select</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+<!--                                            <div class="form-group">-->
+<!--                                                <label for="quantity">Quantity</label>-->
+<!--                                                <input type="number" step="0.01" class="form-control" value="0" id="quantity" name="quantity" >-->
+<!--                                            </div>-->
                                             <div class="form-group">
                                                 <label for="product_status">Product Status</label>
                                                 <input type="checkbox" id="product_status" class="form control js-success" checked/>
                                                 <span>
                                                     <input hidden type="text" id="status_txt" name="product_status" class="form-control" readonly value="active">
                                                 </span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="barcode_no">Barcode</label>
-                                                <input type="text" class="form-control" id="barcode_no" name="barcode_no" placeholder="eg. 8404613064946">
                                             </div>
                                             <button type="submit" id="submit" class="btn btn-primary mr-2">Submit</button>
                                           <?=form_close()?>
@@ -161,8 +156,14 @@
                                 <div class="card" style="min-height: 484px;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12 text-center">
+                                            <div class="col-md-12 text-center mb-2">
                                                 <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                            </div>
+                                            <div class="col-md-6 text-center">
+                                                <img id="blah2" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                            </div>
+                                            <div class="col-md-6 text-center">
+                                                <img id="blah3" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -201,12 +202,12 @@
             $('#category').select2();
         });
 
-        function readURL(input) {
+        function readURL(input, diff) {
             if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            let reader = new FileReader();
     
             reader.onload = function(e) {
-              $('#blah').attr('src', e.target.result);
+              $('#blah'+ diff).attr('src', e.target.result);
             }
               
               reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -214,7 +215,13 @@
           }
 
           $("#imgupload").change(function() {
-            readURL(this);
+            readURL(this,"");
+          });
+        $("#imgupload2").change(function() {
+            readURL(this,"2");
+          });
+        $("#imgupload3").change(function() {
+            readURL(this,"3");
           });
 
         
@@ -298,6 +305,24 @@
             $("#imgupload").change(function (e) {
                 var x = e.target.files[0].name;
                 $("#imagename").val(x);
+            });
+         });
+
+         $("#upbtn2").click(function(){
+            $("#imgupload2").click();
+
+            $("#imgupload2").change(function (e) {
+                var x = e.target.files[0].name;
+                $("#imagename2").val(x);
+            });
+         });
+
+         $("#upbtn3").click(function(){
+            $("#imgupload3").click();
+
+            $("#imgupload3").change(function (e) {
+                var x = e.target.files[0].name;
+                $("#imagename3").val(x);
             });
          });
     </script>

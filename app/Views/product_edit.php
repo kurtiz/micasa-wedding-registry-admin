@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Edit Product | Our Pos</title>
+    <title>Edit Product | MiCasa cPanel</title>
     <meta property="og:image" content="<?= base_url(); ?>/public/src/img/brand-white.png" />
     <meta name="description" content="Edit this product to update it's content on the database">
     <meta name="keywords" content="">
@@ -106,45 +106,34 @@
                                     <input type="number" step="0.01" class="form-control" required  id="sellingprice" name="sellingprice" value="<?=$product[0]['selling_price']?>" placeholder="Selling Price">
                                 </div>
                                 <div class="form-group">
-                                    <label for="costprice">Cost Price</label>
-                                    <input type="number" step="0.01" class="form-control" required id="costprice" value="<?=$product[0]['cost_price']?>" name="costprice" placeholder="Cost Price">
-                                </div>
-                                <div class="form-group">
-                                    <label for="category">Category</label>
-                                        <?php if(is_array($categories)): ?>
-                                            <select id="category" name="category" class="form-control select2">
-                                                <option value="">select category</option>
-                                                <?php foreach ($categories as $row):?>
-                                                    <option
-                                                        <?php
-                                                        if ($product[0]['cat_id'].$product[0]['cat_name'] == $row['cat_id'].$row['cat_name']) {
-                                                            echo "selected";
-                                                        }
-                                                        ?> value="<?=$row['cat_id'].":".$row['cat_name']?>"><?=$row['cat_name']?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        <?php else: ?>
-                                            <select id="category" name="category" class="form-control select2">
-                                            </select>
-                                        <?php endif; ?>
-                                </div>
-                                <div class="form-group">
-                                    <label>Image</label>
-                                    <input type="file" name="img" id="imgupload" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
+                                    <label>Image 1</label>
+                                    <input type="file" name="img[]" id="imgupload" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
                                     <div class="input-group col-xs-12">
-                                        <input type="text" class="form-control file-upload-info" disabled id="imagename" value="<?=$product[0]['image']?>" placeholder="Upload Image">
+                                        <input type="text" class="form-control file-upload-info" value="<?=explode(",", $product[0]['image'])[0]?>" disabled id="imagename" placeholder="Upload Image">
                                         <span class="input-group-append">
-                                            <button class="file-upload-browse btn btn-primary" id="upbtn" type="button">Select</button>
-                                        </span>
+                                                        <button class="file-upload-browse btn btn-primary" id="upbtn" type="button">Select</button>
+                                                    </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="quantity">Quantity</label>
-                                    <input type="number" step="0.01" class="form-control" value="<?=$product[0]['quantity']?>" id="quantity" name="quantity" >
+                                    <label>Image 2</label>
+                                    <input type="file" name="img[]" id="imgupload2" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
+                                    <div class="input-group col-xs-12">
+                                        <input type="text" class="form-control file-upload-info" value="<?=explode(",", $product[0]['image'])[0]?>" disabled id="imagename2" placeholder="Upload Image">
+                                        <span class="input-group-append">
+                                                            <button class="file-upload-browse btn btn-primary" id="upbtn2" type="button">Select</button>
+                                                        </span>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="refill">Refill Alert Level</label>
-                                    <input type="number" step="0.01" class="form-control" value="<?=$product[0]['refill']?>" id="refill" name="refill">
+                                    <label>Image 3</label>
+                                    <input type="file" name="img[]" id="imgupload3" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
+                                    <div class="input-group col-xs-12">
+                                        <input type="text" class="form-control file-upload-info" value="<?=explode(",", $product[0]['image'])[0]?>" disabled id="imagename3" placeholder="Upload Image">
+                                        <span class="input-group-append">
+                                                                <button class="file-upload-browse btn btn-primary" id="upbtn3" type="button">Select</button>
+                                                            </span>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="product_status">Product Status</label>
@@ -173,15 +162,41 @@
                         <div class="card" style="min-height: 484px;">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-12 text-center">
+                                    <div class="col-md-12 text-center mb-2">
                                         <?php
-                                        if($product[0]['image'] == ""):
+                                        if(explode(",", $product[0]['image'])[0] == ""):
                                             ?>
                                             <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                         <?php
                                         else:
                                             ?>
-                                            <img id="blah" class="img-fluid rounded" src="<?=$product[0]['image']?>" alt="">
+                                            <img id="blah" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[0]?>" alt="">
+                                        <?php
+                                        endif;
+                                        ?>
+                                        <?php
+                                        if(explode(",", $product[0]['image'])[1] == ""):
+                                            ?>
+                                            <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                        <?php
+                                        else:
+                                            ?>
+                                            <div class="col-md-6 text-center">
+                                                <img id="blah2" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[1]?>" alt="">
+                                            </div>
+                                        <?php
+                                        endif;
+                                        ?>
+                                        <?php
+                                        if(explode(",", $product[0]['image'])[2] == ""):
+                                            ?>
+                                            <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                        <?php
+                                        else:
+                                            ?>
+                                            <div class="col-md-6 text-center">
+                                                <img id="blah3" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[2]?>" alt="">
+                                            </div>
                                         <?php
                                         endif;
                                         ?>
