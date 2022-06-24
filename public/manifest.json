@@ -1,0 +1,48 @@
+{
+  "author": "Papilio Technologies",
+  "name": "OurPos",
+  "short_name": "OurPos",
+  "description": "Manage Your Store and Sales with Ease",
+  "start_url": "http://localhost/myci4/",
+  "display": "standalone",
+  "background_color": "white",
+  "theme_color": "#404E67",
+  "icons": [{
+    "src": "\"http://localhost/myci4/public/src/img/brand-128.png\"",
+    "sizes": "128x128",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }, {
+    "src": "http://localhost/myci4/public/src/img/brand-144.png",
+    "sizes": "144x144",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }, {
+    "src": "http://localhost/myci4/public/src/img/brand-152.png",
+    "sizes": "152x152",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }, {
+    "src": "http://localhost/myci4/public/src/img/brand-192.png",
+    "sizes": "192x192",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }, {
+    "src": "http://localhost/myci4/public/src/img/brand-256.png",
+    "sizes": "256x256",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }, {
+    "src": "http://localhost/myci4/public/src/img/brand-512.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }],
+  "manifest_version": 2,
+  "version": "0.1",
+  "applications": {
+    "gecko": {
+      "id": "papiliocurtis@gmail.com"
+    }
+  }
+}
