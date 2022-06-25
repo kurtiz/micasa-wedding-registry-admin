@@ -41,11 +41,12 @@
             $builder->where('store_id', $store_id);
             $builder->update($fields);
             
-            if ($this->db->affectedRows() == 1) {
-                return true;
-            }else {
-                return false;
-            }
+//            if ($this->db->affectedRows() == 1) {
+//                return true;
+//            }else {
+//                return false;
+                return $this->db->affectedRows();
+//            }
         }
 
         /**

@@ -85,7 +85,15 @@
                         </div>
                     </div>
                 </div>
-
+                <?php
+                if ($product[0]['image'] !== "") {
+                    $image = explode(",", $product[0]['image']);
+                    $image[] = "";
+                    $image[] = "";
+                    $image[] = "";
+                } else {
+                    $image = ["", "", ""] ;
+                }?>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
@@ -98,18 +106,18 @@
                                     <input type="text" class="form-control" required id="productname" name="productname" value="<?=$product[0]['product_name']?>" placeholder="eg. Coke - 300ml">
                                 </div>
                                 <div class="form-group">
-                                    <label for="specs">Specification</label>
+                                    <label for="specs">Specification / Description</label>
                                     <textarea class="form-control" id="specs" name="description" placeholder="zero sugar, 300ml, "><?=$product[0]['description']?></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="sellingprice">Selling Price</label>
-                                    <input type="number" step="0.01" class="form-control" required  id="sellingprice" name="sellingprice" value="<?=$product[0]['selling_price']?>" placeholder="Selling Price">
+                                    <label for="costprice">Selling Price</label>
+                                    <input type="number" step="0.01" class="form-control" required  id="costprice" name="costprice" value="<?=$product[0]['cost_price']?>" placeholder="Selling Price">
                                 </div>
                                 <div class="form-group">
                                     <label>Image 1</label>
                                     <input type="file" name="img[]" id="imgupload" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
                                     <div class="input-group col-xs-12">
-                                        <input type="text" class="form-control file-upload-info" value="<?=explode(",", $product[0]['image'])[0]?>" disabled id="imagename" placeholder="Upload Image">
+                                        <input type="text" class="form-control file-upload-info" value="<?=$image[0]?>" disabled id="imagename" placeholder="Upload Image">
                                         <span class="input-group-append">
                                                         <button class="file-upload-browse btn btn-primary" id="upbtn" type="button">Select</button>
                                                     </span>
@@ -119,7 +127,7 @@
                                     <label>Image 2</label>
                                     <input type="file" name="img[]" id="imgupload2" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
                                     <div class="input-group col-xs-12">
-                                        <input type="text" class="form-control file-upload-info" value="<?=explode(",", $product[0]['image'])[0]?>" disabled id="imagename2" placeholder="Upload Image">
+                                        <input type="text" class="form-control file-upload-info" value="<?=$image[1]?>" disabled id="imagename2" placeholder="Upload Image">
                                         <span class="input-group-append">
                                                             <button class="file-upload-browse btn btn-primary" id="upbtn2" type="button">Select</button>
                                                         </span>
@@ -129,7 +137,7 @@
                                     <label>Image 3</label>
                                     <input type="file" name="img[]" id="imgupload3" accept=".png, .jpg, jpeg, .gif, .webp, .bmp" class="file-upload-default">
                                     <div class="input-group col-xs-12">
-                                        <input type="text" class="form-control file-upload-info" value="<?=explode(",", $product[0]['image'])[0]?>" disabled id="imagename3" placeholder="Upload Image">
+                                        <input type="text" class="form-control file-upload-info" value="<?=$image[2]?>" disabled id="imagename3" placeholder="Upload Image">
                                         <span class="input-group-append">
                                                                 <button class="file-upload-browse btn btn-primary" id="upbtn3" type="button">Select</button>
                                                             </span>
@@ -146,10 +154,6 @@
                                         <input hidden type="text" id="status_txt" name="product_status" class="form-control" readonly value="active">
                                     </span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="barcode_no">Barcode</label>
-                                    <input type="text" class="form-control" id="barcode_no" name="barcode_no" value="<?=$product[0]['barcode']?>" placeholder="eg. 8404613064946">
-                                </div>
                                 <button type="button" id="deleteBtn" class="btn btn-danger mr-2">Delete</button>
                                 <button type="button" id="updateBtn" class="btn btn-success mr-2">Update</button>
 
@@ -164,39 +168,39 @@
                                 <div class="row">
                                     <div class="col-md-12 text-center mb-2">
                                         <?php
-                                        if(explode(",", $product[0]['image'])[0] == ""):
+                                        if($image[0] == ""):
                                             ?>
                                             <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                         <?php
                                         else:
                                             ?>
-                                            <img id="blah" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[0]?>" alt="">
+                                            <img id="blah" class="img-fluid rounded" src="<?=base_url() . $image[0]?>" alt="">
                                         <?php
                                         endif;
                                         ?>
+                                    </div>
+                                    <div class="col-md-6 text-center">
                                         <?php
-                                        if(explode(",", $product[0]['image'])[1] == ""):
+                                        if($image[1] == ""):
                                             ?>
-                                            <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                            <img id="blah2" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                         <?php
                                         else:
-                                            ?>
-                                            <div class="col-md-6 text-center">
-                                                <img id="blah2" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[1]?>" alt="">
-                                            </div>
+                                        ?>
+                                            <img id="blah2" class="img-fluid rounded" src="<?=base_url() . $image[1]?>" alt="">
                                         <?php
                                         endif;
                                         ?>
+                                    </div>
+                                    <div class="col-md-6 text-center">
                                         <?php
-                                        if(explode(",", $product[0]['image'])[2] == ""):
-                                            ?>
-                                            <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                        if($image[2] == ""):
+                                        ?>
+                                            <img id="blah3" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                         <?php
                                         else:
-                                            ?>
-                                            <div class="col-md-6 text-center">
-                                                <img id="blah3" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[2]?>" alt="">
-                                            </div>
+                                        ?>
+                                            <img id="blah3" class="img-fluid rounded" src="<?=base_url() . $image[2]?>" alt="">
                                         <?php
                                         endif;
                                         ?>
@@ -233,12 +237,12 @@
 <script>
     // reads the url of the image uploaded and target it
     // to preview card
-    function readURL(input) {
+    function readURL(input, diff) {
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            let reader = new FileReader();
 
             reader.onload = function(e) {
-                $('#blah').attr('src', e.target.result);
+                $('#blah'+ diff).attr('src', e.target.result);
             }
 
             reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -255,6 +259,35 @@
             $("#imagename").val(x);
             readURL(this);
         });
+    });
+
+    $("#upbtn2").click(function(){
+        $("#imgupload2").click();
+
+        $("#imgupload2").change(function (e) {
+            var x = e.target.files[0].name;
+            $("#imagename2").val(x);
+        });
+    });
+
+    $("#upbtn3").click(function(){
+        $("#imgupload3").click();
+
+        $("#imgupload3").change(function (e) {
+            var x = e.target.files[0].name;
+            $("#imagename3").val(x);
+        });
+    });
+
+
+    $("#imgupload").change(function() {
+        readURL(this,"");
+    });
+    $("#imgupload2").change(function() {
+        readURL(this,"2");
+    });
+    $("#imgupload3").change(function() {
+        readURL(this,"3");
     });
 
     // Instantiating of select button

@@ -85,7 +85,6 @@ class Products extends Controller
 
             $data['userdata'] = $this->dashModel->getLoggedUserData((string)$this->user_id);
 
-            $category = explode(":", $this->request->getVar("category"));
             $fields = [
                 "product_name" => $this->request->getVar("productname", FILTER_SANITIZE_STRING),
                 "description" => $this->request->getVar("description", FILTER_SANITIZE_STRING),
@@ -119,18 +118,25 @@ class Products extends Controller
         $saveProduct = $this->productsModel->createProduct($fields);
 
         if ($saveProduct) {
-//                    $list = ["img", "img2", "img3"];
             $filePaths = "";
 
             if ($this->request->getFileMultiple('img')) {
 
                 foreach ($this->request->getFileMultiple('img') as $file) {
-                    $fileName = $file->getRandomName();
-                    $file->move(FCPATH . 'public/uploads/products', $fileName);
-                    $filePaths .= '/public/uploads/products/' . $fileName .",";
+                    if ($file->isValid() && !$file->hasMoved()) {
+                        $fileName = $file->getRandomName();
+                        $file->move(FCPATH . 'public/uploads/products', $fileName);
+                        $filePaths .= '/public/uploads/products/' . $fileName . ",";
+                    }
                 }
 
-                if ($this->productsModel->updateProductImg($fields['barcode'], (string)$this->store_id, ['image' => $filePaths])) {
+                $imageData = [
+                    'image' => $filePaths,
+                    'date_updated' => date("Y-m-d"),
+                    'time_updated' => date('h:i A', strtotime(date("h:i")))
+                ];
+
+                if ($this->productsModel->updateProductImg($fields['barcode'], (string)$this->store_id, $imageData)) {
 
                     session()->setTempdata('success', $fields['product_name'] . ' has been added successfully', 5);
 
@@ -192,43 +198,15 @@ class Products extends Controller
         if ($this->request->getMethod() == "post") {
 
             $data['userdata'] = $this->dashModel->getLoggedUserData((string)$this->user_id);
-
-            if (!empty($this->request->getVar("category"))) {
-                $category = explode(":", $this->request->getVar("category"));
-                $fields = [
-                    "product_name" => $this->request->getVar("productname", FILTER_SANITIZE_STRING),
-                    "description" => $this->request->getVar("description", FILTER_SANITIZE_STRING),
-                    "selling_price" => $this->request->getVar("sellingprice"),
-                    "cost_price" => $this->request->getVar("costprice"),
-                    "refill" => $this->request->getVar("refill"),
-                    "status" => $this->request->getVar("product_status"),
-                    "quantity" => $this->request->getVar("quantity"),
-                    "store_id" => $this->store_id,
-                    "cat_id" => $category[0],
-                    "cat_name" => $category[1],
-                ];
-            } else {
-                $fields = [
-                    "product_name" => $this->request->getVar("productname", FILTER_SANITIZE_STRING),
-                    "description" => $this->request->getVar("description", FILTER_SANITIZE_STRING),
-                    "selling_price" => $this->request->getVar("sellingprice"),
-                    "cost_price" => $this->request->getVar("costprice"),
-                    "refill" => $this->request->getVar("refill"),
-                    "quantity" => $this->request->getVar("quantity"),
-                    "status" => $this->request->getVar("product_status"),
-                    "store_id" => $this->store_id,
-                    "cat_id" => "",
-                    "cat_name" => "",
-                ];
-            }
-
-            if ($this->request->getVar("barcode_no", FILTER_SANITIZE_STRING) == "") {
-
-                $fields['barcode'] = rand(1000000000000, 9999999999999);
-
-            } else {
-                $fields['barcode'] = $this->request->getVar("barcode_no", FILTER_SANITIZE_STRING);
-            }
+            $fields = [
+                "product_name" => $this->request->getVar("productname", FILTER_SANITIZE_STRING),
+                "description" => $this->request->getVar("description", FILTER_SANITIZE_STRING),
+                "cost_price" => $this->request->getVar("costprice"),
+                "status" => $this->request->getVar("product_status"),
+                "date_updated" => date("Y-m-d"),
+                "time_updated" => date('h:i A', strtotime(date("h:i"))),
+                "store_id" => $this->store_id
+            ];
 
             $clauses = [
                 "store_id" => $this->store_id,
@@ -238,87 +216,52 @@ class Products extends Controller
             $updateProduct = $this->productsModel->updateProduct($clauses, $fields);
 
             if ($updateProduct) {
-                if (null !== $this->request->getFile("img")) {
+                $filePaths = "";
 
-                    $file = $this->request->getFile('img');
+                if ($this->request->getFileMultiple('img')) {
 
-
-                    if ($file->isValid() && !$file->hasMoved()) {
-
-                        $fileName = $file->getRandomName();
-
-                        if ($file->move(FCPATH . 'public/uploads/products', $fileName)) {
-
-                            $path = base_url() . '/public/uploads/products/' . $fileName;
-
-                            if ($this->productsModel->updateProductImg($fields['barcode'], $fields['store_id'], ['image' => $path])) {
-
-                                session()->setTempdata('success', $fields['product_name'] . ' has been updated successfully', 5);
-                                return redirect()->to(base_url() . "/products/view/$id");
-
-                            } else {
-
-                                session()->setTempdata('error', 'An error occurred while saving image.', 5);
-                                return redirect()->to(base_url() . "/products/view/$id");
-                            }
-
-                        } else {
-
-                            session()->setTempdata('error', 'An error occurred while uploading file. <br>' . $file->getErrorString(), 3);
-                            return redirect()->to(base_url() . "/products/view/$id");
-
+                    foreach ($this->request->getFileMultiple('img') as $file) {
+                        if ($file->isValid() && !$file->hasMoved()) {
+                            $fileName = $file->getRandomName();
+                            $file->move(FCPATH . 'public/uploads/products', $fileName);
+                            $filePaths .= '/public/uploads/products/' . $fileName . ",";
                         }
-                    } else {
-                        session()->setTempdata('success', $fields['product_name'] . ' has been updated successfully', 5);
-                        return redirect()->to(base_url() . "/products/view/$id");
                     }
 
+                    $imageData = [
+                        'image' => $filePaths,
+                        'date_updated' => date("Y-m-d"),
+                        'time_updated' => date('h:i A', strtotime(date("h:i"))),
+                        'last_edit_user_id' => $this->user_id,
+                        'last_edit_user_name' => $data['userdata']->name,
+                    ];
+
+                    $imgUpdate = $this->productsModel->updateProductImg($data["product"][0]["barcode"], (string)$this->store_id, $imageData);
+
+                    if ($imgUpdate) {
+
+                        session()->setTempdata('success', $fields['product_name'] . ' has been updated successfully', 5);
+
+                    } else {
+
+                        session()->setTempdata('error', 'An error occurred while saving image.', 5);
+                    }
+                    return redirect()->to(base_url() . "/products/view/$id");
+                }
+                else {
+                    session()->setTempdata('success', $fields['product_name'] . ' has been added successfully', 5);
                 }
             } else {
-
-                if (null !== $this->request->getFile("img")) {
-
-                    $file = $this->request->getFile('img');
-
-                    if ($file->isValid() && !$file->hasMoved()) {
-
-                        $fileName = $file->getRandomName();
-
-                        if ($file->move(FCPATH . 'public/uploads/products', $fileName)) {
-
-                            $path = base_url() . '/public/uploads/products/' . $fileName;
-
-                            if ($this->productsModel->updateProductImg($fields['barcode'], $fields['store_id'], ['image' => $path])) {
-
-                                session()->setTempdata('success', $fields['product_name'] . ' has been updated successfully', 5);
-                                return redirect()->to(base_url() . "/products/view/$id");
-
-                            } else {
-
-                                session()->setTempdata('error', 'An error occurred while saving image.', 5);
-                                return redirect()->to(base_url() . "/products/view/$id");
-                            }
-
-                        } else {
-
-                            session()->setTempdata('error', 'An error occurred while uploading file. <br>' . $file->getErrorString(), 3);
-                            return redirect()->to(base_url() . "/products/view/$id");
-
-                        }
-                    } else {
-                        session()->setTempdata('success', $fields['product_name'] . ' has been updated successfully', 5);
-                        return redirect()->to(base_url() . "/products/view/$id");
-                    }
-                }
+                session()->setTempdata("error", "Sorry! Unable to update product. Please try again", 5);
+                return redirect()->to(base_url() . "/products/view/$id");
             }
         }
-
         return view("product_edit", $data);
     }
 
     /**
      * @param string $id id of the product to be deleted
-     * @return false|string returns message on operations results in JSON format
+     * @return RedirectResponse|false|string
      */
     public function delete(string $id)
     {

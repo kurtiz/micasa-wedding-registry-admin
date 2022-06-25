@@ -2,6 +2,7 @@
 
 
     namespace App\Controllers;
+    use App\Models\OrdersModel;
     use App\Models\RolesModel;
     use CodeIgniter\Config\Config;
     use CodeIgniter\Controller;
@@ -16,7 +17,7 @@
      * Class Store
      * @package App\Controllers
      */
-    class Store extends Controller{
+    class Orders extends Controller{
 
         /**
          * an instance of the DashboardModel Class
@@ -55,6 +56,12 @@
         public $rolesModel;
 
         /**
+         * an instance of the RolesModel Class
+         * @var object $rolesModel
+         */
+        public $ordersModel;
+
+        /**
          * user id of the logged user
          * @var array|string|null
          */
@@ -88,6 +95,7 @@
             $this->storeModel = new StoreModel();
             $this->customersModel = new CustomersModel();
             $this->rolesModel = new RolesModel();
+            $this->ordersModel = new OrdersModel();
             $this->user_id = session()->get("user_id");
             $this->store_id = session()->get("store_id");
             $this->userdata = $this->dashModel->getLoggedUserData((string)$this->user_id);
@@ -896,7 +904,32 @@
 //                "store_id" => "benney5fd19d133eedd_202012121653335fd549ed9b014"
 //            ]);
 //            echo $salesCount;
+            $arrayA = array('one','two','three','four','five');
 
+            $arrayB = array('one','two','three','four','five');
+
+
+            $newArray = array_diff($arrayB,$arrayA);
+
+
+
+            echo '<pre>';
+
+            print_r($arrayA);
+
+            echo '</pre>';
+
+            echo '<pre>';
+
+            print_r($arrayB);
+
+            echo '</pre>';
+
+            echo '<pre>';
+
+            print_r($newArray);
+
+            echo '</pre>';
             exit;
             return view("test");
         }

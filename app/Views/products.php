@@ -101,7 +101,7 @@
                                                 <tr>
                                                     <th class="nosort"></th>
                                                     <th>Name</th>
-                                                    <th>Description</th>
+                                                    <?php /*<th>Description</th>*/?>
                                                     <th>Price ($)</th>
                                                     <th class="nosort">&nbsp;</th>
                                                 </tr>
@@ -114,7 +114,7 @@
                                                         <td><img id="img<?=$row['product_id']?>" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" class="table-user-thumb" alt=""></td>
                                                     <?php endif; ?>
                                                     <td id="name<?=$row['product_id']?>" ><?=$row['product_name']?></td>
-                                                    <td><?=$row['description']?></td>
+                                                    <?php /*<td><?=$row['description']?></td>*/?>
                                                     <td><?=$row['cost_price']?></td>
                                                     <td>
                                                         <div class="table-actions">

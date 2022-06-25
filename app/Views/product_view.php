@@ -84,7 +84,15 @@
                         </div>
                     </div>
                 </div>
-
+                <?php
+                if ($product[0]['image'] !== "") {
+                    $image = explode(",", $product[0]['image']);
+                    $image[] = "";
+                    $image[] = "";
+                    $image[] = "";
+                } else {
+                    $image = ["", "", ""] ;
+                }?>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
@@ -134,10 +142,10 @@
                                         <input hidden type="text" id="status_txt" name="product_status" class="form-control" readonly value="active">
                                     </span>
                                 </div>
-                                <div class="form-group">
+                                <?php /*<div class="form-group">
                                     <label for="barcode_no">Barcode</label>
                                     <input type="text" class="form-control" disabled id="barcode_no" required name="barcode_no" value="<?=$product[0]['barcode']?>" placeholder="eg. 8404613064946">
-                                </div>
+                                </div> */?>
                                 <button type="button" id="editBtn" class="btn btn-primary mr-2">Edit</button>
                                 <button type="button" id="deleteBtn" class="btn btn-danger mr-2">Delete</button>
                                 <?=form_close()?>
@@ -151,39 +159,39 @@
                                 <div class="row">
                                     <div class="col-md-12 text-center mb-2">
                                         <?php
-                                        if(explode(",", $product[0]['image'])[0] == ""):
-                                        ?>
+                                        if($image[0] == ""):
+                                            ?>
                                             <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                         <?php
                                         else:
-                                        ?>
-                                        <img id="blah" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[0]?>" alt="">
+                                            ?>
+                                            <img id="blah" class="img-fluid rounded" src="<?=base_url() . $image[0]?>" alt="">
                                         <?php
                                         endif;
                                         ?>
+                                    </div>
+                                    <div class="col-md-6 text-center">
                                         <?php
-                                        if(explode(",", $product[0]['image'])[1] == ""):
-                                        ?>
-                                        <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                        if($image[1] == ""):
+                                            ?>
+                                            <img id="blah2" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                         <?php
                                         else:
-                                        ?>
-                                        <div class="col-md-6 text-center">
-                                            <img id="blah2" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[1]?>" alt="">
-                                        </div>
+                                            ?>
+                                            <img id="blah2" class="img-fluid rounded" src="<?=base_url() . $image[1]?>" alt="">
                                         <?php
                                         endif;
                                         ?>
+                                    </div>
+                                    <div class="col-md-6 text-center">
                                         <?php
-                                        if(explode(",", $product[0]['image'])[2] == ""):
-                                        ?>
-                                        <img id="blah" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
+                                        if($image[2] == ""):
+                                            ?>
+                                            <img id="blah3" class="img-fluid rounded" src="<?=base_url()?>/public/img/uploads/products/product-default-image.png" alt="">
                                         <?php
                                         else:
-                                        ?>
-                                        <div class="col-md-6 text-center">
-                                            <img id="blah3" class="img-fluid rounded" src="<?=base_url() . explode(",", $product[0]['image'])[2]?>" alt="">
-                                        </div>
+                                            ?>
+                                            <img id="blah3" class="img-fluid rounded" src="<?=base_url() . $image[2]?>" alt="">
                                         <?php
                                         endif;
                                         ?>
