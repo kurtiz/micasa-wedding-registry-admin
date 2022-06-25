@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sales | MiCasa cPanel</title>
+    <title>Orders | MiCasa cPanel</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,8 +68,8 @@
                             <div class="page-header-title">
                                 <i class="ik ik-grid bg-blue"></i>
                                 <div class="d-inline">
-                                    <h5>Direct Sales</h5>
-                                    <span>All direct sales made are listed here</span>
+                                    <h5>Orders</h5>
+                                    <span>All Orders are listed here</span>
                                 </div>
                             </div>
                         </div>
@@ -79,8 +79,8 @@
                                     <li class="breadcrumb-item">
                                         <a id="domain" href="<?= base_url(); ?>"><i class="ik ik-home"></i></a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="<?= base_url(); ?>/store">Store</a></li>
-                                    <li class="breadcrumb-item active">Sales</li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Store</a></li>
+                                    <li class="breadcrumb-item active">Orders</li>
                                 </ol>
                             </nav>
                         </div>
@@ -91,30 +91,29 @@
                     <div class="col-sm-12">
                         <div class="card table-card">
                             <div class="card-header d-block">
-                                <h3>Sales</h3>
+                                <h3>Orders</h3>
                             </div>
                             <div class="card-body">
                                 <div class="col-md-12 table-responsive">
                                     <table id="sales_data_table" class="sales_table nowrap table">
-                                        <?php if (is_array($sales)): ?>
+                                        <?php if (is_array($orders)): ?>
                                             <thead>
                                             <tr>
                                                 <th>Date / Time</th>
-                                                <th>Receipt No.</th>
+                                                <th>Order No.</th>
                                                 <th>Sale Rep</th>
-                                                <th>Customer</th>
-                                                <th>Total Amount(GH¢)</th>
+                                                <th>Total Amount($dollars)</th>
                                                 <th class="nosort">&nbsp;</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            <?php foreach($sales as $row): ?>
-                                                <tr id="sale<?=$row["sales_id"]?>">
-                                                    <td id=""><?= $row['date_sold'] . " " . $row['time_sold'] ?></td>
-                                                    <td><?= $row['receipt_num'] ?></td>
+                                            <?php foreach($orders as $row): ?>
+                                                <tr id="sale<?=$row["order_id"]?>">
+                                                    <td id=""><?= $row['order_date'] . " " . $row['order_time'] ?></td>
+                                                    <td>MHA<?= $row['order_id'] ?></td>
                                                     <td>
-                                                        <a href="<?= base_url() ?>/users/<?= $row['user_id'] ?>" loading="true" style="color: #0f38ff"><?= $row['user_name'] ?></a>
+                                                        <?= $row['user_name'] ?>
                                                     </td>
                                                     <?php if (!empty($row['customer_name'])): ?>
                                                         <td>
